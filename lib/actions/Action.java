@@ -1,4 +1,6 @@
-package spiderling.lib.spiderli;
+package spiderling.lib.actions;
+
+import spiderling.lib.checks.Check;
 
 /**
  * The main action class. Provides the base for all actions.
@@ -49,15 +51,12 @@ public abstract class Action{
      * Runs when the action first starts. This method is used to handle anything that needs to be done before the action runs.
      * This method also runs another method, {@link #onStart() onStart()}, which can be overwritten by individual actions.
      *
-     * @param command The command in which this action is being run.
      */
-    public final void initialise(CommandBase command) {
-        this.command = command;
-        check.initialise(command, this);
+    public final void initialise() {
+        check.initialise(this);
         startTime = System.currentTimeMillis();
         isInterrupted = false;
         isRunning = true;
-        if(systemDependencies != null) for(SubsystemBase subsystem : systemDependencies) new ComActionDependency(subsystem, this).start();
         onStart();
     }
 
