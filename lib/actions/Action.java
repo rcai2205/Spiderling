@@ -1,5 +1,6 @@
 package spiderling.lib.actions;
 
+import spiderling.lib.Hardware.HardwareMapBase;
 import spiderling.lib.checks.Check;
 
 /**
@@ -24,7 +25,7 @@ public abstract class Action{
      *
      * @param check The check associated with the action that determines when the action is complete
      */
-    protected Action(Check check) {
+    protected Action(HardwareMapBase hardwareMap, Check check) {
         this.check = check;
     }
 

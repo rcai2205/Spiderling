@@ -2,6 +2,7 @@ package spiderling.lib.checks;
 
 import java.util.Timer;
 
+import spiderling.lib.Hardware.HardwareMapBase;
 import spiderling.lib.actions.Action;
 
 public abstract class Check {
@@ -39,7 +40,7 @@ public abstract class Check {
     /**
      * Runs when the check first starts. This method is used to handle anything that needs to be done before the check runs.
      * This method also runs another method, {@link #onStart() onStart()}, which can be overwritten by individual checks.
-     *
+     *4
      * @param action The action which is running this check.
      */
     public final void initialise(Action action) {
@@ -124,7 +125,7 @@ public abstract class Check {
          * @param useAbsoluteReading Whether the absolute analog reading should be used.
          * @param shouldReset Whether whatever is returning an analog reading should be reset to 0 at the beginning of the check.
          */
-        public CheckAnalog(double value, boolean isGreaterThan, boolean useAbsoluteReading, boolean shouldReset) {
+        public CheckAnalog(HardwareMapBase hardwareMap, double value, boolean isGreaterThan, boolean useAbsoluteReading, boolean shouldReset) {
             this.value = value;
             type = isGreaterThan;
             isAbsolute = useAbsoluteReading;
