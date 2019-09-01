@@ -1,6 +1,6 @@
 package spiderling.lib.checks;
 
-import spiderling.lib.hardware.HardwareMapBase;
+import spiderling.core.HardwareMapBase;
 import spiderling.lib.actions.Action;
 import spiderling.lib.logic.GettableBoolean;
 
