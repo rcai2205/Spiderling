@@ -6,9 +6,7 @@ import spiderling.lib.logic.GettableBoolean;
 
 public abstract class Check implements GettableBoolean {
 
-    /** The action within which this check is running.
-     *
-     */
+    /** The action within which this check is running.**/
     public Action action;
 
     private boolean isInverse = false;
