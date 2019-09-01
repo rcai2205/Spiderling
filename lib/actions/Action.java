@@ -111,4 +111,14 @@ public abstract class Action{
     public final double timeSinceInitialized() {
         return startTime < 0 ? 0 : System.currentTimeMillis() - startTime;
     }
+
+    public final boolean actionLoop(Action action) {
+        if (!action.isRunning) action.initialise();
+        action.execute();
+        if (action.isDone()) {
+            action.end();
+            return true;
+        }
+        return false;
+    }
 }
