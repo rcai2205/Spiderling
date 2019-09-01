@@ -16,7 +16,7 @@ public class AcWait extends Action {
      *
      * @param timeout The number of seconds that the action will wait for.
      */
-    public AcWait(HardwareMapBase hardwareMap, double timeout) {
-        super(hardwareMap, new ChTime(timeout));
+    public AcWait(double timeout) {
+        super(new ChTime(timeout));
     }
 }

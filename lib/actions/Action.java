@@ -17,6 +17,7 @@ public abstract class Action{
     /** The check associated with the action that determines when the action is complete. */
     public final Check check;
 
+
     /** The time that this action began. Used for calculation of time spent running. */
     private long startTime = -1;
 
@@ -25,7 +26,7 @@ public abstract class Action{
      *
      * @param check The check associated with the action that determines when the action is complete
      */
-    protected Action(HardwareMapBase hardwareMap, Check check) {
+    protected Action( Check check) {
         this.check = check;
     }
 
