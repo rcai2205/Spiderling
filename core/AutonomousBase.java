@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import spiderling.lib.Hardware.HardwareMapBase;
+import spiderling.lib.hardware.HardwareMapBase;
 import spiderling.lib.actions.Action;
 
 

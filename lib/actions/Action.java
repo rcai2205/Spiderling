@@ -1,6 +1,5 @@
 package spiderling.lib.actions;
 
-import spiderling.lib.Hardware.HardwareMapBase;
 import spiderling.lib.checks.Check;
 
 /**

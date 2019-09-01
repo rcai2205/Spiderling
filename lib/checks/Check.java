@@ -1,11 +1,10 @@
 package spiderling.lib.checks;
 
-import java.util.Timer;
-
-import spiderling.lib.Hardware.HardwareMapBase;
+import spiderling.lib.hardware.HardwareMapBase;
 import spiderling.lib.actions.Action;
+import spiderling.lib.logic.GettableBoolean;
 
-public abstract class Check {
+public abstract class Check implements GettableBoolean {
 
     /** The action within which this check is running.
      *

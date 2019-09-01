@@ -2,7 +2,6 @@ package spiderling.lib.actions.actuators;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import spiderling.lib.Hardware.HardwareMapBase;
 import spiderling.lib.actions.Action;
 import spiderling.lib.checks.ChFalse;
 import spiderling.lib.checks.ChTrue;

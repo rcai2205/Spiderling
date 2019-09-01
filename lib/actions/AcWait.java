@@ -1,8 +1,5 @@
 package spiderling.lib.actions;
 
-import com.qualcomm.robotcore.hardware.HardwareMap;
-
-import spiderling.lib.Hardware.HardwareMapBase;
 import spiderling.lib.checks.ChTime;
 
 /**

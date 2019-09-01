@@ -1,4 +1,4 @@
-package spiderling.lib.Hardware;
+package spiderling.lib.hardware;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
