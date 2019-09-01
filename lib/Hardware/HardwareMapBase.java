@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 public abstract class HardwareMapBase {
     /* local OpMode members. */
-    HardwareMap hwMap           =  null;
+    protected HardwareMap hwMap           =  null;
     private ElapsedTime period  = new ElapsedTime();
 
     /* Constructor */

@@ -25,11 +25,17 @@ public abstract class AutonomousBase extends OpMode {
     //Code that runs when INT is pressed
     @Override
     public final void init() {
+        HardwareMapBase robot = getHardwareMap();
         robot.init(hardwareMap);
         initialise();
     }
 
-    protected abstract void initialise();
+    /**
+     * Code that runs ONCE when the driver hits int.
+     */
+    protected void initialise() {
+
+    }
 
     //Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
     @Override
@@ -65,5 +71,9 @@ public abstract class AutonomousBase extends OpMode {
      */
     protected abstract Action[] getAutonomous();
 
-
+    /**
+     * Implemented by Each Subclass
+     * @return the HardwareMap being used.
+     */
+    protected abstract HardwareMapBase getHardwareMap();
 }
