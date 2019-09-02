@@ -10,7 +10,7 @@ public class ChTime extends Check {
      */
     public ChTime(double timeout) {
         super();
-        time = (long) timeout/1000;
+        time = (long) timeout*1000;
     }
 
     public boolean isDone() {
