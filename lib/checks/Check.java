@@ -122,7 +122,7 @@ public abstract class Check implements GettableBoolean {
          * @param useAbsoluteReading Whether the absolute analog reading should be used.
          * @param shouldReset Whether whatever is returning an analog reading should be reset to 0 at the beginning of the check.
          */
-        public CheckAnalog(HardwareMapBase hardwareMap, double value, boolean isGreaterThan, boolean useAbsoluteReading, boolean shouldReset) {
+        public CheckAnalog(double value, boolean isGreaterThan, boolean useAbsoluteReading, boolean shouldReset) {
             this.value = value;
             type = isGreaterThan;
             isAbsolute = useAbsoluteReading;
