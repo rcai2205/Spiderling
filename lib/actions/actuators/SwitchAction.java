@@ -1,0 +1,77 @@
+package spiderling.lib.actions.actuators;
+
+import spiderling.lib.actions.Action;
+import spiderling.lib.checks.ChFalse;
+import spiderling.lib.logic.GettableBoolean;
+
+/**
+ * An action that will run one action from a list of actions based on conditions.
+ *
+ * @author Sean Zammit
+ */
+public class SwitchAction extends Action
+{
+    /** The action that has been selected to run. Will be null until {@link #onStart() onStart()} is called. */
+    public Action chosenAction;
+
+    private Action defaultAction;
+    private OptionAction[] options;
+
+    /**
+     * Constructor for an action that will run one action from a list of options.
+     *
+     * @param defaultAction The action to run if no conditions are met.
+     * @param options Pairings of actions and conditions, which will be checked until one of the conditions is met, or the list ends.
+     */
+    public SwitchAction(Action defaultAction, OptionAction... options) {
+        super(new ChFalse());
+        this.defaultAction = defaultAction;
+        this.options = options;
+    }
+
+    /**
+     * A pairing of an action with the condition required for it to be run. Used only in {@link SwitchAction SwitchAction}.
+     *
+     * @author Sean Zammit
+     */
+    public static class OptionAction
+    {
+        /** The boolean value determining whether the action should be run. */
+        public GettableBoolean requirement;
+
+        /** The action to run if the condition is met. */
+        public Action option;
+
+        /**
+         * Constructor to pair an action with a required condition.
+         * Note that a {@link spiderling.lib.checks.Check Check} is a valid {@link GettableBoolean GettableBoolean}, but its {@link spiderling.lib.checks.Check#initialise(Action) initialise(CommandBase, Action)}, {@link Check#onRun() onRun()} and {@link Check#onFinish() onFinish()} methods will not be called.
+         *
+         * @param requirement The boolean value determining whether the action should be run.
+         * @param option The action to run.
+         */
+        public OptionAction(GettableBoolean requirement, Action option) {
+            this.requirement = requirement;
+            this.option = option;
+        }
+    }
+
+    public void onStart() {
+        for(OptionAction option : options) if(option.requirement.get()) {
+            chosenAction = option.option;
+            return;
+        }
+        chosenAction = defaultAction;
+    }
+
+    public void onRun() {
+        chosenAction.execute();
+    }
+
+    public void onFinish() {
+        chosenAction.end();
+    }
+
+    protected boolean isDone() {
+        return chosenAction.isFinished();
+    }
+}
