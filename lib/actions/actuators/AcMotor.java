@@ -2,10 +2,14 @@ package spiderling.lib.actions.actuators;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.teamcode.HardwareMapBluebacks;
+
+import spiderling.core.HardwareMapBase;
 import spiderling.lib.actions.Action;
 import spiderling.lib.checks.ChFalse;
 import spiderling.lib.checks.ChTrue;
 import spiderling.lib.checks.Check;
+import spiderling.lib.hardware.CtrlMotor;
 
 public class AcMotor extends Action {
     /**
@@ -25,8 +29,9 @@ public class AcMotor extends Action {
      */
     public static class Set extends Action
     {
-        private DcMotor motor;
+        public CtrlMotor motor;
         private double speed;
+
 
         /**
          * Constructor for an action that repeatedly sets a motor to a specified speed.
@@ -35,7 +40,7 @@ public class AcMotor extends Action {
          * @param speed The speed that the motor should be set to.
          * @param check The condition that will finish the action.
          */
-        public Set(DcMotor motor, double speed, Check check) {
+        public Set(CtrlMotor motor, double speed, Check check) {
             super(check);
             this.motor = motor;
             this.speed = speed;
@@ -44,7 +49,6 @@ public class AcMotor extends Action {
         public void onStart() {
             motor.setPower(speed);
         }
-
         public void onRun() {
             motor.setPower(speed);
         }
@@ -62,7 +66,7 @@ public class AcMotor extends Action {
          *
          * @param motor The motor being disabled.
          */
-        public Disable(DcMotor motor) {
+        public Disable(CtrlMotor motor) {
             super(motor, 0, new ChTrue());
         }
     }

@@ -23,7 +23,7 @@ public abstract class AutonomousBase extends OpMode {
     //Code that runs when INT is pressed
     @Override
     public final void init() {
-        getHardwareMap().init(hardwareMap); //Made this change to if the cast to the regular hard
+        //getHardwareMap().init(hardwareMap); //Made this change to if this fixes Null error.
         initialise();
     }
 
