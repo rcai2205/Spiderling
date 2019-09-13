@@ -11,7 +11,6 @@ import spiderling.lib.actions.Action;
 @Autonomous(name="AutonomousBase", group="Redbacks")
 public abstract class AutonomousBase extends OpMode {
     final double moveSp = 0.4D;
-    HardwareMapBase robot;
 
     double lastTime;
     int counter;
@@ -20,12 +19,9 @@ public abstract class AutonomousBase extends OpMode {
     };
 
 
-
     //Code that runs when INT is pressed
     @Override
     public final void init() {
-        HardwareMapBase robot = getHardwareMap();
-        robot.init(hardwareMap);
         initialise();
     }
 
@@ -52,7 +48,9 @@ public abstract class AutonomousBase extends OpMode {
     public final void loop() {
         Action[] actions = getAutonomous();
         if(counter < actions.length) {
+            telemetry.addData("actions progress", counter);
           if (actions[counter].actionLoop(actions[counter])) {
+              telemetry.addData("action finished", actions.length);
               counter++;
           }
         }

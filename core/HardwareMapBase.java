@@ -15,8 +15,10 @@ public abstract class HardwareMapBase {
     public final void init(HardwareMap ahwMap) {
         // Save reference to Hardware map
         hwMap = ahwMap;
-        initHardware();
+        initHardware(hwMap);
     }
 
-    protected abstract void initHardware();
+    protected abstract void initHardware(HardwareMap hwMap);
+
+    public abstract static class HardwareDevice{};
 }

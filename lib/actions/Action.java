@@ -115,7 +115,7 @@ public abstract class Action{
     public final boolean actionLoop(Action action) {
         if (!action.isRunning) action.initialise();
         action.execute();
-        if (action.isDone()) {
+        if (action.isFinished()) {
             action.end();
             return true;
         }
