@@ -6,11 +6,16 @@ import com.qualcomm.robotcore.hardware.ServoController;
 
 import spiderling.core.HardwareMapBase;
 
+/**
+ * Wrapper Class for a Servo.
+ * @author Ben Schwarz
+ */
 public class NonrotationalServo extends HardwareDevice {
     public Servo servo;
     private Servo.Direction initialDirection;
 
-    public NonrotationalServo(String name, Servo.Direction direction) {
+    public NonrotationalServo(HardwareMapBase hardwareMap, String name, Servo.Direction direction) {
+      super(hardwareMap);
       this.name = name;
       this.initialDirection = direction;
     }

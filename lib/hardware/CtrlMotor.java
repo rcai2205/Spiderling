@@ -8,13 +8,18 @@ import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigu
 
 import spiderling.core.HardwareMapBase;
 
+/**
+ * Wrapper Class for a DcMotor
+ * @author Ben Schwarz
+ */
 public class CtrlMotor extends HardwareDevice {
     public DcMotor motor;
     private double initialPower;
     DcMotor.Direction initialDirection;
     DcMotor.RunMode initialRunMode;
 
-    public CtrlMotor(String name, DcMotor.Direction direction, DcMotor.RunMode runMode) {
+    public CtrlMotor(HardwareMapBase hardwareMap, String name, DcMotor.Direction direction, DcMotor.RunMode runMode) {
+        super(hardwareMap);
         this.name = name;
         this.initialDirection = direction;
         this.initialRunMode= runMode;
