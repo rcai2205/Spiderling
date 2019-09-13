@@ -4,7 +4,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-public class CtrlMotor implements GettableMotor{
+import spiderling.core.HardwareMapBase;
+
+public class CtrlMotor extends HardwareMapBase.HardwareDevice {
     public DcMotor motor;
     String name;
     private double power;
@@ -29,8 +31,5 @@ public class CtrlMotor implements GettableMotor{
         this.motor.setPower(power);
     }
 
-    public CtrlMotor getMotor() {
-        return this;
-    }
 }
 

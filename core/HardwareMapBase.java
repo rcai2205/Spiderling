@@ -19,4 +19,6 @@ public abstract class HardwareMapBase {
     }
 
     protected abstract void initHardware(HardwareMap hwMap);
+
+    public abstract static class HardwareDevice{};
 }
