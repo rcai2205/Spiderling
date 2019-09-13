@@ -7,6 +7,10 @@ import spiderling.lib.checks.ChTrue;
 import spiderling.lib.checks.Check;
 import spiderling.lib.hardware.NonrotationalServo;
 
+/**
+ * Sets a Servo to a position.
+ * @author Benjamin Schwarz
+ */
 public class AcServo extends Action {
     NonrotationalServo servo;
     double position;

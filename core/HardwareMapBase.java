@@ -8,6 +8,16 @@ import java.util.List;
 
 import spiderling.lib.hardware.HardwareDevice;
 
+/**
+ * The base class for all Spiderling HardwareMaps.
+ * It handles the initialisation of all Spiderling HardwareDevices @see HardwareDevice.
+ * All Hardware Devices should be created and defined in a subclass of this class.
+ *Spiderling Hardware Devices should be defined at the top of the class.
+ * Non-Spiderling Hardware Devices should be listed at the top, but with null listed instead of a constructor as done in - @see org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot
+ * To initialise Non-Spiderling Hardware Devices, implement the initHardware method.
+ *
+ * @author Ben Schwarz.
+ */
 public abstract class HardwareMapBase {
     /* local OpMode members. */
     protected HardwareMap hwMap           =  null;
