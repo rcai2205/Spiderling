@@ -4,25 +4,33 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-public class CtrlMotor {
+public class CtrlMotor implements GettableMotor{
     public DcMotor motor;
     String name;
     private double power;
-    private HardwareMap hwMap;
     DcMotor.Direction direction;
     DcMotor.RunMode runMode;
 
-    public CtrlMotor(HardwareMap hwMap, String name, DcMotor.Direction direction, DcMotor.RunMode runMode) {
-        this.motor = hwMap.get(DcMotor.class, name);
+    public CtrlMotor(String name, DcMotor.Direction direction, DcMotor.RunMode runMode) {
         this.name = name;
+        this.direction = direction;
+        this.runMode = runMode;
+    }
+
+    public void init(HardwareMap hwMap) {
+        this.motor = hwMap.get(DcMotor.class, name);
         this.motor.setDirection(direction);
         this.motor.setPower(0);
         this.motor.setMode(runMode);
-
     }
 
     public void setPower(double power) {
-        this.motor.getController().setMotorPower(motor.getPortNumber(), power);
+        //this.motor.getController().setMotorPower(motor.getPortNumber(), power);
+        this.motor.setPower(power);
+    }
+
+    public CtrlMotor getMotor() {
+        return this;
     }
 }
 

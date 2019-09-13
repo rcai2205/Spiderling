@@ -10,6 +10,7 @@ import spiderling.lib.checks.ChFalse;
 import spiderling.lib.checks.ChTrue;
 import spiderling.lib.checks.Check;
 import spiderling.lib.hardware.CtrlMotor;
+import spiderling.lib.hardware.GettableMotor;
 
 public class AcMotor extends Action {
     /**
@@ -31,6 +32,7 @@ public class AcMotor extends Action {
     {
         public CtrlMotor motor;
         private double speed;
+        public GettableMotor gettableMotor;
 
 
         /**
@@ -40,13 +42,14 @@ public class AcMotor extends Action {
          * @param speed The speed that the motor should be set to.
          * @param check The condition that will finish the action.
          */
-        public Set(CtrlMotor motor, double speed, Check check) {
+        public Set(GettableMotor motor, double speed, Check check) {
             super(check);
-            this.motor = motor;
+            this.gettableMotor = motor;
             this.speed = speed;
         }
 
         public void onStart() {
+            motor = gettableMotor.getMotor();
             motor.setPower(speed);
         }
         public void onRun() {
@@ -66,7 +69,7 @@ public class AcMotor extends Action {
          *
          * @param motor The motor being disabled.
          */
-        public Disable(CtrlMotor motor) {
+        public Disable(GettableMotor motor) {
             super(motor, 0, new ChTrue());
         }
     }
