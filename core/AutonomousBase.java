@@ -19,7 +19,6 @@ public abstract class AutonomousBase extends OpMode {
     };
 
 
-    //FIXME Suspect code here.
     //Code that runs when INT is pressed
     @Override
     public final void init() {
