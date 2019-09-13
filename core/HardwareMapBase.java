@@ -20,15 +20,5 @@ public abstract class HardwareMapBase {
 
     protected abstract void initHardware(HardwareMap hwMap);
 
-    public abstract static class HardwareDevice{
-        public String getName() {
-            return name;
-        }
 
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        protected String name;
-    };
 }

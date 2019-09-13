@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigu
 
 import spiderling.core.HardwareMapBase;
 
-public class CtrlMotor extends HardwareMapBase.HardwareDevice {
+public class CtrlMotor extends HardwareDevice {
     public DcMotor motor;
     private double initialPower;
     DcMotor.Direction initialDirection;

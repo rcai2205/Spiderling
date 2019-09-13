@@ -5,9 +5,10 @@ import com.qualcomm.robotcore.hardware.Servo;
 import spiderling.lib.actions.Action;
 import spiderling.lib.checks.ChFalse;
 import spiderling.lib.checks.Check;
+import spiderling.lib.hardware.NonrotationalServo;
 
 public class AcServo extends Action {
-    Servo servo;
+    NonrotationalServo servo;
     double position;
 
     /**
@@ -15,7 +16,7 @@ public class AcServo extends Action {
      * @param servo The servo which position will be set.
      * @param position Sets the position of the servo.
      */
-    public AcServo(Servo servo, double position) {
+    public AcServo(NonrotationalServo servo, double position) {
         super(new ChFalse());
         this.servo = servo;
         this.position = position;
