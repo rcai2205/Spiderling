@@ -8,6 +8,7 @@ public abstract class HardwareMapBase {
     protected HardwareMap hwMap           =  null;
     private ElapsedTime period  = new ElapsedTime();
 
+
     /* Constructor */
     public HardwareMapBase(){
     }

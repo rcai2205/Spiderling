@@ -85,7 +85,7 @@ public class CtrlMotor extends HardwareDevice {
      * @return the current level of the motor, a value in the interval [0.0, 1.0]
      * @see #setPower(double)
      */
-    double getPower() {
+    public double getPower() {
         return motor.getPower();
     }
 
@@ -96,7 +96,7 @@ public class CtrlMotor extends HardwareDevice {
      * configuration user interface, though it may subsequently be modified using methods herein.
      * @return the assigned type for this motor
      */
-    MotorConfigurationType getMotorType() {
+    public MotorConfigurationType getMotorType() {
         return motor.getMotorType();
     }
 
@@ -105,7 +105,7 @@ public class CtrlMotor extends HardwareDevice {
      * @param motorType the new assigned type for this motor
      * @see #getMotorType()
      */
-    void setMotorType(MotorConfigurationType motorType) {
+    public void setMotorType(MotorConfigurationType motorType) {
         motor.setMotorType(motorType);
     };
 
@@ -114,7 +114,7 @@ public class CtrlMotor extends HardwareDevice {
      * @return the underlying motor controller on which this motor is situated.
      * @see #getPortNumber()
      */
-    DcMotorController getController() {
+    public DcMotorController getController() {
         return motor.getController();
     }
 
@@ -123,7 +123,7 @@ public class CtrlMotor extends HardwareDevice {
      * @return the port number on the underlying motor controller on which this motor is situated.
      * @see #getController()
      */
-    int getPortNumber() {
+    public int getPortNumber() {
         return motor.getPortNumber();
     }
 
@@ -134,7 +134,7 @@ public class CtrlMotor extends HardwareDevice {
      * @see DcMotor.ZeroPowerBehavior
      * @see #setPower(double)
      */
-    void setZeroPowerBehavior(DcMotor.ZeroPowerBehavior zeroPowerBehavior) {
+    public void setZeroPowerBehavior(DcMotor.ZeroPowerBehavior zeroPowerBehavior) {
         motor.setZeroPowerBehavior(zeroPowerBehavior);
     };
 
@@ -142,7 +142,7 @@ public class CtrlMotor extends HardwareDevice {
      * Returns the current behavior of the motor were a power level of zero to be applied.
      * @return the current behavior of the motor were a power level of zero to be applied.
      */
-    DcMotor.ZeroPowerBehavior getZeroPowerBehavior() {
+    public DcMotor.ZeroPowerBehavior getZeroPowerBehavior() {
         return motor.getZeroPowerBehavior();
     };
 
@@ -151,7 +151,7 @@ public class CtrlMotor extends HardwareDevice {
      * Returns whether the motor is currently in a float power level.
      * @return whether the motor is currently in a float power level.
      */
-    boolean getPowerFloat() {
+    public boolean getPowerFloat() {
         return motor.getPowerFloat();
     };
     /**
@@ -172,7 +172,7 @@ public class CtrlMotor extends HardwareDevice {
      * @see #getTargetPosition()
      * @see #isBusy()
      */
-    void setTargetPosition(int position) {
+    public void setTargetPosition(int position) {
         motor.setTargetPosition(position);
     }
 
@@ -181,7 +181,7 @@ public class CtrlMotor extends HardwareDevice {
      * @return the current target encoder position for this motor.
      * @see #setTargetPosition(int)
      */
-    int getTargetPosition() {
+    public int getTargetPosition() {
         return motor.getTargetPosition();
     }
 
@@ -190,7 +190,7 @@ public class CtrlMotor extends HardwareDevice {
      * @return true if the motor is currently advancing or retreating to a target position.
      * @see #setTargetPosition(int)
      */
-    boolean isBusy() {
+    public boolean isBusy() {
         return motor.isBusy();
     };
 
@@ -202,7 +202,7 @@ public class CtrlMotor extends HardwareDevice {
      * @see #getTargetPosition()
      * @see DcMotor.RunMode#STOP_AND_RESET_ENCODER
      */
-    int getCurrentPosition() {
+    public int getCurrentPosition() {
         return motor.getCurrentPosition();
     };
 

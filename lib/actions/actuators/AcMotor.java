@@ -75,7 +75,7 @@ public class AcMotor extends Action {
      */
     public static class RampTime extends Action
     {
-        private DcMotor motor;
+        private CtrlMotor motor;
         private double speed, time, startSpeed, startTime;
         private boolean shouldEnd;
 
@@ -86,7 +86,7 @@ public class AcMotor extends Action {
          * @param speed The speed that the motor should reach at the end of the period.
          * @param time The time over which the change in speed should occur.
          */
-        public RampTime(DcMotor motor, double speed, double time) {
+        public RampTime(CtrlMotor motor, double speed, double time) {
             this(motor, speed, time, new ChFalse(), true);
         }
 
@@ -99,7 +99,7 @@ public class AcMotor extends Action {
          * @param check A condition that will finish the action regardless of time elapsed.
          * @param shouldEndWhenComplete Whether the action should automatically finish once the time is up.
          */
-        public RampTime(DcMotor motor, double speed, double time, Check check, boolean shouldEndWhenComplete) {
+        public RampTime(CtrlMotor motor, double speed, double time, Check check, boolean shouldEndWhenComplete) {
             super(check);
             this.motor = motor;
             this.speed = speed;
@@ -134,7 +134,7 @@ public class AcMotor extends Action {
      */
     public static class RampAccel extends Action
     {
-        private DcMotor motor;
+        private CtrlMotor motor;
         private double speed, accel, startSpeed, startTime;
         private boolean shouldEnd;
 
@@ -145,7 +145,7 @@ public class AcMotor extends Action {
          * @param speed The speed that the motor should reach at the end of the acceleration.
          * @param accelPerSec The acceleration of the motor per second. e.g. If the motor starts at -1, and this is set to 0.5, it will take 4 seconds to reach 1.
          */
-        public RampAccel(DcMotor motor, double speed, double accelPerSec) {
+        public RampAccel(CtrlMotor motor, double speed, double accelPerSec) {
             this(motor, speed, accelPerSec, new ChFalse(), true);
         }
 
@@ -158,7 +158,7 @@ public class AcMotor extends Action {
          * @param check A condition that will finish the action regardless of speed reached.
          * @param shouldEndWhenComplete Whether the action should automatically finish once the speed is reached.
          */
-        public RampAccel(DcMotor motor, double speed, double accelPerSec, Check check, boolean shouldEndWhenComplete) {
+        public RampAccel(CtrlMotor motor, double speed, double accelPerSec, Check check, boolean shouldEndWhenComplete) {
             super(check);
             this.motor = motor;
             this.speed = speed;

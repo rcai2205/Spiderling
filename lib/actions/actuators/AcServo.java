@@ -3,7 +3,7 @@ package spiderling.lib.actions.actuators;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import spiderling.lib.actions.Action;
-import spiderling.lib.checks.ChFalse;
+import spiderling.lib.checks.ChTrue;
 import spiderling.lib.checks.Check;
 import spiderling.lib.hardware.NonrotationalServo;
 
@@ -17,7 +17,7 @@ public class AcServo extends Action {
      * @param position Sets the position of the servo.
      */
     public AcServo(NonrotationalServo servo, double position) {
-        super(new ChFalse());
+        super(new ChTrue());
         this.servo = servo;
         this.position = position;
     }
