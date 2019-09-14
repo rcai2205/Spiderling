@@ -1,11 +1,10 @@
 package spiderling.lib.actions;
 
-import spiderling.lib.actions.Action;
+import spiderling.lib.checks.ChFalse;
 import spiderling.lib.checks.ChMulti;
 import spiderling.lib.checks.ChTrue;
 import spiderling.lib.checks.Check;
 import spiderling.lib.checks.digital.ChGettableBoolean;
-import spiderling.lib.logic.GettableBoolean;
 import spiderling.lib.logic.LogicOperators;
 
 /**
@@ -21,40 +20,35 @@ public class MultiAction {
         Action[] actions;
 
 
-        public Sequential(Check check) {
-            super(check);
-        }
+
         /**
          * Constructor to run multiple actions consecutively
          * Will only finish after all actions in the sequence are complete.
          * @param actions The sequence of actions to be completed.
          */
         public Sequential(Action... actions) {
-            super(new ChTrue()); //FIXME Temp change to remove errors.
-            new ChGettableBoolean(() -> counter >= actions.length, true);
+            super(new ChFalse());
+            this.check = new ChGettableBoolean(() -> counter >= actions.length, true);
             this.actions = actions;
 
 
         }
         /**
          * Constructor to run multiple actions consecutively
-         * @param mustFinishSequence Determines if the action will conclude if either the inputted check is completed or the sequence is complete, or if both the check and the sequence need to complete.
-         * @param check The check to determine
+         * @param check The check to determine if the action should finish.
+         * @param mustFinishSequence Determines if the action will conclude if either the inputted check is completed or the sequence is complete (FALSE),
+         *                           or if both the check and the sequence need to complete in order for the action to complete (TRUE).
          * @param actions The sequence of actions to be completed.
          */
         public Sequential (Check check, boolean mustFinishSequence, Action... actions) {
-            super((new ChTrue())); //FIXME Temp changes to remove errors.
+            super(new ChFalse());
             if (mustFinishSequence) this.check = new ChMulti(LogicOperators.AND, new ChGettableBoolean(() -> counter >= actions.length, true), check);
             else this.check = new ChMulti(LogicOperators.OR, new ChGettableBoolean(() -> counter >= actions.length, true), check);
         }
 
-        /**
-         * Used by individual actions to set other conditions for the action to be complete.
-         *
-         * @return Whether the action should stop running.
-         */
+
         protected boolean isDone() {
-            return false;
+            return check.isFinished();
         }
 
         /**
@@ -68,19 +62,12 @@ public class MultiAction {
             }
         }
 
-
-
-
-
     }
 
     public static class Parallel extends Action{
         Check check = null;
-
-
         int counter = 0;
         Action[] actions;
-
 
         /**
          * Constructor to run multiple actions consecutively
@@ -88,12 +75,11 @@ public class MultiAction {
          * @param actions The sequence of actions to be completed.
          */
         public Parallel(Action... actions) {
-            super(new ChTrue()); //FIXME Temp change to remove errors.
-            new ChGettableBoolean(() -> counter >= actions.length, true);
+            super(new ChTrue());
+            this.check = new ChGettableBoolean(() -> counter >= actions.length, true);
             this.actions = actions;
-
-
         }
+
         /**
          * Constructor to run multiple actions consecutively
          * @param mustFinishSequence Determines if the action will conclude if either the inputted check is completed or the sequence is complete, or if both the check and the sequence need to complete.
@@ -101,43 +87,28 @@ public class MultiAction {
          * @param actions The sequence of actions to be completed.
          */
         public Parallel (Check check, boolean mustFinishSequence, Action... actions) {
-            super((new ChTrue())); //FIXME Temp changes to remove errors.
+            super((new ChTrue()));
             if (mustFinishSequence) this.check = new ChMulti(LogicOperators.AND, new ChGettableBoolean(() -> counter >= actions.length, true), check);
             else this.check = new ChMulti(LogicOperators.OR, new ChGettableBoolean(() -> counter >= actions.length, true), check);
         }
 
         /**
          * Used by individual actions to set other conditions for the action to be complete.
-         *
          * @return Whether the action should stop running.
          */
         protected boolean isDone() {
-            return false;
+            return check.isFinished();
         }
 
         /**
          * Calls the action loop for each action that hasn't yet concluded.
-         * It calls parrallelActionLoop instead of Action.actionLoop which instead
          */
         protected void onRun() {
             for(Action action: actions) {
-                if(counter < actions.length) {
-                    if (action.isFinished())
-                    if (parrallelActionLoop(actions[counter])) {
-                        counter++;
-                    }
-                }
+                if (action.isFinished()) continue;
+                if (action.actionLoop(action)) counter++;
             }
         }
-        public final boolean parrallelActionLoop(Action action) {
-            if (!action.isRunning) action.initialise();
-            if (!action.isDone()) action.execute();
-            if (action.isDone()) {
-                action.end();
-                return true;
-            }
-            return false;
-        }
-}
+    }
 }
 
