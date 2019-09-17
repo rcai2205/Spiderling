@@ -9,7 +9,7 @@ import spiderling.lib.hardware.NonrotationalServo;
 
 /**
  * Sets a Servo to a position.
- * @author Benjamin Schwarz
+ * @author Ben Schwarz
  */
 public class AcServo extends Action {
     NonrotationalServo servo;

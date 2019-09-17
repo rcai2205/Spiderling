@@ -22,12 +22,13 @@ public class AcMotor extends Action {
      * An action used to immediately set a motor to a certain speed.
      * For gradual speed changes, use {@link RampTime AcMotor.RampTime} or {@link RampAccel AcMotor.RampAccel}.
      *
-     * @author Sean Zammit
+     * @author Sean Zammit, Ben Schwarz
      */
     public static class Set extends Action
     {
         public CtrlMotor motor;
         private double speed;
+        private boolean disableOnFinish = false;
 
 
         /**
@@ -43,12 +44,29 @@ public class AcMotor extends Action {
             this.speed = speed;
         }
 
+        /**
+         * Constructor for an action that repeatedly sets a motor to a specified speed.
+         *
+         * @param motor The motor being set.
+         * @param speed The speed that the motor should be set to.
+         * @param check The condition that will finish the action.
+         * @param disableOnFinish If the action should set the motor power to 0 at the action's conclusion.
+         */
+        public Set(CtrlMotor motor, double speed, Check check, boolean disableOnFinish) {
+            this(motor, speed, check);
+            this.disableOnFinish = disableOnFinish;
+        }
+
         public void onStart() {
             motor.setPower(speed);
         }
         public void onRun() {
             motor.setPower(speed);
         }
+        public void onFinish(){
+            if(disableOnFinish) motor.setPower(0);
+        }
+
     }
 
     /**
