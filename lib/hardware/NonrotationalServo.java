@@ -15,8 +15,7 @@ public class NonrotationalServo extends HardwareDevice {
     private Servo.Direction initialDirection;
 
     public NonrotationalServo(HardwareMapBase hardwareMap, String name, Servo.Direction direction) {
-      super(hardwareMap);
-      this.name = name;
+      super(hardwareMap, name);
       this.initialDirection = direction;
     }
 

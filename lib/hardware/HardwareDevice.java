@@ -18,8 +18,9 @@ public abstract class HardwareDevice{
      * Constructor which adds device to list of devices to be initialised in initialisation.
      * @param hardwareMap The hardwareMap in which the device is created.
      */
-    public HardwareDevice(HardwareMapBase hardwareMap) {
+    public HardwareDevice(HardwareMapBase hardwareMap, String name) {
         hardwareMap.addDevice(this);
+        this.name = name;
     }
 
     /**
