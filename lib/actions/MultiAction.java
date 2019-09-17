@@ -14,12 +14,8 @@ public class MultiAction {
 
     public static class Sequential extends Action{
         Check check = null;
-
-
         int counter = 0;
         Action[] actions;
-
-
 
         /**
          * Constructor to run multiple actions consecutively
@@ -30,9 +26,8 @@ public class MultiAction {
             super(new ChFalse());
             this.check = new ChGettableBoolean(() -> counter >= actions.length, true);
             this.actions = actions;
-
-
         }
+
         /**
          * Constructor to run multiple actions consecutively
          * @param check The check to determine if the action should finish.
@@ -44,6 +39,7 @@ public class MultiAction {
             super(new ChFalse());
             if (mustFinishSequence) this.check = new ChMulti(LogicOperators.AND, new ChGettableBoolean(() -> counter >= actions.length, true), check);
             else this.check = new ChMulti(LogicOperators.OR, new ChGettableBoolean(() -> counter >= actions.length, true), check);
+            this.actions = actions;
         }
 
 
@@ -90,6 +86,7 @@ public class MultiAction {
             super((new ChTrue()));
             if (mustFinishSequence) this.check = new ChMulti(LogicOperators.AND, new ChGettableBoolean(() -> counter >= actions.length, true), check);
             else this.check = new ChMulti(LogicOperators.OR, new ChGettableBoolean(() -> counter >= actions.length, true), check);
+            this.actions = actions;
         }
 
         /**
