@@ -58,6 +58,13 @@ public class MultiAction {
             }
         }
 
+        /**
+         * Calls the onFinish Command of each Action
+         */
+        protected void onFinish() {
+            for (Action action: actions) action.onFinish();
+        }
+
     }
 
     public static class Parallel extends Action{
@@ -106,6 +113,15 @@ public class MultiAction {
                 if (action.actionLoop(action)) counter++;
             }
         }
+
+        /**
+         * Calls the onFinish Command of each Action
+         */
+        protected void onFinish() {
+            for (Action action: actions) action.onFinish();
+        }
+
+
     }
 }
 
