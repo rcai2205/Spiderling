@@ -19,8 +19,7 @@ public class CtrlMotor extends HardwareDevice {
     DcMotor.RunMode initialRunMode;
 
     public CtrlMotor(HardwareMapBase hardwareMap, String name, DcMotor.Direction direction, DcMotor.RunMode runMode) {
-        super(hardwareMap);
-        this.name = name;
+        super(hardwareMap, name);
         this.initialDirection = direction;
         this.initialRunMode= runMode;
     }
