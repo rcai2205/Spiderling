@@ -59,10 +59,10 @@ public class MultiAction {
         }
 
         /**
-         * Calls the onFinish Command of each Action
+         * Calls the onFinish Command of the current action if interrupted.
          */
         protected void onFinish() {
-            for (Action action: actions) action.onFinish();
+            if (counter < actions.length) actions[counter].end();
         }
 
     }
