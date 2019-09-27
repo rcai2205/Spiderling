@@ -78,7 +78,7 @@ public class MultiAction {
          * @param actions The sequence of actions to be completed.
          */
         public Parallel(Action... actions) {
-            super(new ChTrue());
+            super(new ChFalse());
             this.check = new ChGettableBoolean(() -> counter >= actions.length, true);
             this.actions = actions;
         }
@@ -90,7 +90,7 @@ public class MultiAction {
          * @param actions The sequence of actions to be completed.
          */
         public Parallel (Check check, boolean mustFinishSequence, Action... actions) {
-            super((new ChTrue()));
+            super((new ChFalse()));
             if (mustFinishSequence) this.check = new ChMulti(LogicOperators.AND, new ChGettableBoolean(() -> counter >= actions.length, true), check);
             else this.check = new ChMulti(LogicOperators.OR, new ChGettableBoolean(() -> counter >= actions.length, true), check);
             this.actions = actions;
@@ -102,6 +102,15 @@ public class MultiAction {
          */
         protected boolean isDone() {
             return check.isFinished();
+        }
+
+
+        /**
+         * This runs each action in the parrallel sequence once.
+         */
+        @Override
+        protected void onStart() {
+            for (Action action: actions) if(action.actionLoop(action)) counter++;
         }
 
         /**

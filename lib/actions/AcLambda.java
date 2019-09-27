@@ -1,9 +1,8 @@
 package spiderling.lib.actions;
 
-import java.util.function.BooleanSupplier;
-import java.util.function.Consumer;
-
 import spiderling.lib.checks.Check;
+import spiderling.lib.logic.Consumer;
+import spiderling.lib.logic.GettableBoolean;
 
 /**
  * An action that can be fully defined by functional interfaces.
@@ -16,13 +15,11 @@ import spiderling.lib.checks.Check;
 public class AcLambda extends Action
 {
     Consumer<Action> onStart, onRun, onFinish;
-    BooleanSupplier isDone;
+    GettableBoolean isDone;
 
     /**
      * Constructor for an action whose functionality is fully defined by functional interfaces.
      *
-     * @param check The condition that will finish the action.
-     * @param onRun A function to run repeatedly while the action runs. The function takes this action as input and returns no output.
      */
     public AcLambda(Check check, Consumer<Action> onRun) {
         this(check, action -> {}, onRun, action -> {}, () -> false);
@@ -49,7 +46,7 @@ public class AcLambda extends Action
      * @param onFinish A function to run when the action finishes. The function takes this action as input and returns no output.
      * @param isDone A function to determine whether the action should stop running. The function takes no input and returns a boolean output.
      */
-    public AcLambda(Check check, Consumer<Action> onStart, Consumer<Action> onRun, Consumer<Action> onFinish, BooleanSupplier isDone) {
+    public AcLambda(Check check, Consumer<Action> onStart, Consumer<Action> onRun, Consumer<Action> onFinish, GettableBoolean isDone) {
         super(check);
         this.onStart = onStart;
         this.onRun = onRun;
@@ -70,6 +67,6 @@ public class AcLambda extends Action
     }
 
     public boolean isDone() {
-        return isDone.getAsBoolean();
+        return isDone.get();
     }
 }
