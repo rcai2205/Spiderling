@@ -1,5 +1,7 @@
 package spiderling.lib.actions;
 
+import java.util.ArrayList;
+
 import spiderling.lib.checks.ChFalse;
 import spiderling.lib.checks.ChMulti;
 import spiderling.lib.checks.ChTrue;
@@ -70,7 +72,7 @@ public class MultiAction {
     public static class Parallel extends Action{
         Check check = null;
         int counter = 0;
-        Action[] actions;
+        ArrayList<Action> actions = new ArrayList<>();
 
         /**
          * Constructor to run multiple actions consecutively
@@ -80,8 +82,8 @@ public class MultiAction {
         public Parallel(Action... actions) {
             super(new ChFalse());
             this.check = new ChGettableBoolean(() -> counter >= actions.length, true);
-            this.actions = actions;
-        }
+            for (Action action : actions) this.actions.add(action);
+    }
 
         /**
          * Constructor to run multiple actions consecutively
@@ -93,7 +95,7 @@ public class MultiAction {
             super((new ChFalse()));
             if (mustFinishSequence) this.check = new ChMulti(LogicOperators.AND, new ChGettableBoolean(() -> counter >= actions.length, true), check);
             else this.check = new ChMulti(LogicOperators.OR, new ChGettableBoolean(() -> counter >= actions.length, true), check);
-            this.actions = actions;
+            for (Action action : actions) this.actions.add(action);
         }
 
         /**
@@ -117,9 +119,11 @@ public class MultiAction {
          * Calls the action loop for each action that hasn't yet concluded.
          */
         protected void onRun() {
-            for(Action action: actions) {
-                if (action.isFinished()) continue;
-                if (action.actionLoop(action)) counter++;
+            for(int i = 0; i< actions.size(); i++) {
+                if (actions.get(i).actionLoop(actions.get(i))) {
+                    actions.remove(actions.get(i));
+                    counter++;
+                }
             }
         }
 
