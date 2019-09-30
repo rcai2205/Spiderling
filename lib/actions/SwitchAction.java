@@ -1,6 +1,5 @@
-package spiderling.lib.actions.actuators;
+package spiderling.lib.actions;
 
-import spiderling.lib.actions.Action;
 import spiderling.lib.checks.ChFalse;
 import spiderling.lib.logic.GettableBoolean;
 
@@ -63,15 +62,7 @@ public class SwitchAction extends Action
         chosenAction = defaultAction;
     }
 
-    public void onRun() {
-        chosenAction.execute();
-    }
-
-    public void onFinish() {
-        chosenAction.end();
-    }
-
     protected boolean isDone() {
-        return chosenAction.isFinished();
+        return chosenAction.actionLoop(chosenAction);
     }
 }
