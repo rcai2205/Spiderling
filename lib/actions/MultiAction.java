@@ -93,7 +93,9 @@ public class MultiAction {
          */
         public Parallel (Check check, boolean mustFinishSequence, Action... actions) {
             super((new ChFalse()));
-            if (mustFinishSequence) this.check = new ChMulti(LogicOperators.AND, new ChGettableBoolean(() -> counter >= actions.length, true), check);
+            if (mustFinishSequence) {
+                this.check = new ChMulti(LogicOperators.AND, new ChGettableBoolean(() -> counter >= actions.length, true), check);
+            }
             else this.check = new ChMulti(LogicOperators.OR, new ChGettableBoolean(() -> counter >= actions.length, true), check);
             for (Action action : actions) this.actions.add(action);
         }
