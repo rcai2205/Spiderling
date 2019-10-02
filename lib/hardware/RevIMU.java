@@ -27,11 +27,6 @@ public class RevIMU extends HardwareDevice{
     public void init(HardwareMap hwMap) {
         imu = hwMap.get(BNO055IMU.class, name);
         imu.initialize(parameters);
-        while(!imu.isSystemCalibrated()) {
-            try{
-                Thread.sleep(50);
-            } catch (InterruptedException e) {}
-        }
     }
 
     /**

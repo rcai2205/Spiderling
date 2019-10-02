@@ -17,7 +17,6 @@ import java.util.List;
 import spiderling.lib.actions.AcWait;
 import spiderling.lib.actions.Action;
 import spiderling.lib.actions.MultiAction;
-import spiderling.lib.actions.actuators.SwitchAction;
 import spiderling.lib.actions.actuators.AcMotor;
 import spiderling.lib.actions.actuators.AcServo;
 import spiderling.lib.checks.ChTime;

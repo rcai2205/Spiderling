@@ -1,5 +1,8 @@
 package spiderling.lib.actions;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import spiderling.lib.checks.ChFalse;
 import spiderling.lib.checks.ChMulti;
 import spiderling.lib.checks.ChTrue;
@@ -58,12 +61,19 @@ public class MultiAction {
             }
         }
 
+        /**
+         * Calls the onFinish Command of the current action if interrupted.
+         */
+        protected void onFinish() {
+            if (counter < actions.length) actions[counter].end();
+        }
+
     }
 
     public static class Parallel extends Action{
         Check check = null;
         int counter = 0;
-        Action[] actions;
+        ArrayList<Action> actions = new ArrayList<>();
 
         /**
          * Constructor to run multiple actions consecutively
@@ -71,10 +81,10 @@ public class MultiAction {
          * @param actions The sequence of actions to be completed.
          */
         public Parallel(Action... actions) {
-            super(new ChTrue());
+            super(new ChFalse());
             this.check = new ChGettableBoolean(() -> counter >= actions.length, true);
-            this.actions = actions;
-        }
+            this.actions.addAll(Arrays.asList(actions));
+    }
 
         /**
          * Constructor to run multiple actions consecutively
@@ -83,10 +93,12 @@ public class MultiAction {
          * @param actions The sequence of actions to be completed.
          */
         public Parallel (Check check, boolean mustFinishSequence, Action... actions) {
-            super((new ChTrue()));
-            if (mustFinishSequence) this.check = new ChMulti(LogicOperators.AND, new ChGettableBoolean(() -> counter >= actions.length, true), check);
+            super((new ChFalse()));
+            if (mustFinishSequence) {
+                this.check = new ChMulti(LogicOperators.AND, new ChGettableBoolean(() -> counter >= actions.length, true), check);
+            }
             else this.check = new ChMulti(LogicOperators.OR, new ChGettableBoolean(() -> counter >= actions.length, true), check);
-            this.actions = actions;
+            this.actions.addAll(Arrays.asList(actions));
         }
 
         /**
@@ -97,15 +109,35 @@ public class MultiAction {
             return check.isFinished();
         }
 
+
+        /**
+         * This runs each action in the parrallel sequence once.
+         */
+        @Override
+        protected void onStart() {
+            for (Action action: actions) if(action.actionLoop(action)) counter++;
+        }
+
         /**
          * Calls the action loop for each action that hasn't yet concluded.
          */
         protected void onRun() {
-            for(Action action: actions) {
-                if (action.isFinished()) continue;
-                if (action.actionLoop(action)) counter++;
+            for(int i = 0; i< actions.size(); i++) {
+                if (actions.get(i).actionLoop(actions.get(i))) {
+                    actions.remove(actions.get(i));
+                    counter++;
+                }
             }
         }
+
+        /**
+         * Calls the onFinish Command of each Action
+         */
+        protected void onFinish() {
+            for (Action action: actions) action.onFinish();
+        }
+
+
     }
 }
 
