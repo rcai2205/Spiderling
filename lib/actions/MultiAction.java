@@ -1,6 +1,7 @@
 package spiderling.lib.actions;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import spiderling.lib.checks.ChFalse;
 import spiderling.lib.checks.ChMulti;
@@ -82,7 +83,7 @@ public class MultiAction {
         public Parallel(Action... actions) {
             super(new ChFalse());
             this.check = new ChGettableBoolean(() -> counter >= actions.length, true);
-            for (Action action : actions) this.actions.add(action);
+            this.actions.addAll(Arrays.asList(actions));
     }
 
         /**
@@ -97,7 +98,7 @@ public class MultiAction {
                 this.check = new ChMulti(LogicOperators.AND, new ChGettableBoolean(() -> counter >= actions.length, true), check);
             }
             else this.check = new ChMulti(LogicOperators.OR, new ChGettableBoolean(() -> counter >= actions.length, true), check);
-            for (Action action : actions) this.actions.add(action);
+            this.actions.addAll(Arrays.asList(actions));
         }
 
         /**
