@@ -17,7 +17,7 @@ import java.util.List;
 import spiderling.lib.actions.AcWait;
 import spiderling.lib.actions.Action;
 import spiderling.lib.actions.MultiAction;
-import spiderling.lib.actions.SwitchAction;
+import spiderling.lib.actions.actuators.SwitchAction;
 import spiderling.lib.actions.actuators.AcMotor;
 import spiderling.lib.actions.actuators.AcServo;
 import spiderling.lib.checks.ChTime;
@@ -138,6 +138,6 @@ public abstract class HardwareMapBase {
 //            sensorColor = hwMap.get(ColorSensor.class, "sensor_color_distance");
 //
 //        }
-    }
+//    }
 
 }
