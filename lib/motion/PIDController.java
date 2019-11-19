@@ -188,26 +188,26 @@ public class PIDController {
         /**
          * Sets the maximum and minimum values expected from the input.
          *
-         * @param minimumInput the minimum value expected from the input, always positive
-         * @param maximumInput the maximum value expected from the output, always positive
+         * @param minimumInput the minimum value expected from the input
+         * @param maximumInput the maximum value expected from the output
          */
         public void setInputRange(double minimumInput, double maximumInput)
         {
-            this.minimumInput = Math.abs(minimumInput);
-            this.maximumInput = Math.abs(maximumInput);
+            this.minimumInput = minimumInput;
+            this.maximumInput = maximumInput;
             setSetpoint(setpoint);
         }
 
         /**
          * Sets the minimum and maximum values to write.
          *
-         * @param minimumOutput the minimum value to write to the output, always positive
-         * @param maximumOutput the maximum value to write to the output, always positive
+         * @param minimumOutput the minimum value to write to the output
+         * @param maximumOutput the maximum value to write to the output
          */
         public void setOutputRange(double minimumOutput, double maximumOutput)
         {
-            this.minimumOutput = Math.abs(minimumOutput);
-            this.maximumOutput = Math.abs(maximumOutput);
+            this.minimumOutput = minimumOutput;
+            this.maximumOutput = maximumOutput;
         }
 
         /**
