@@ -89,9 +89,9 @@ public class MecanumDriveKinematics {
      *                         will rotate around that corner.
      * @return  The wheel speeds. Use caution because they are not normalized. Sometimes, a user
      *          input may cause one of the wheel speeds to go above the attainable max velocity. Use
-     *          the {@link MecanumDriveWheelSpeeds#normalize(double)} function to rectify this issue.
+     *          the {@link MecanumWheelSpeeds#normalize(double)} function to rectify this issue.
      */
-    public MecanumDriveWheelSpeeds toWheelSpeeds(ChassisSpeeds chassisSpeeds,
+    public MecanumWheelSpeeds toWheelSpeeds(ChassisSpeeds chassisSpeeds,
                                                  Translation2d centerOfRotationMeters) {
         // We have a new center of rotation. We need to compute the matrix again.
         if (!centerOfRotationMeters.equals(m_prevCoR)) {
@@ -110,7 +110,7 @@ public class MecanumDriveKinematics {
                 chassisSpeeds.omegaRadiansPerSecond);
 
         var wheelsMatrix = m_inverseKinematics.mult(chassisSpeedsVector);
-        return new MecanumDriveWheelSpeeds(
+        return new MecanumWheelSpeeds(
                 wheelsMatrix.get(0, 0),
                 wheelsMatrix.get(1, 0),
                 wheelsMatrix.get(2, 0),
@@ -125,7 +125,7 @@ public class MecanumDriveKinematics {
      * @param chassisSpeeds The desired chassis speed.
      * @return The wheel speeds.
      */
-    public MecanumDriveWheelSpeeds toWheelSpeeds(ChassisSpeeds chassisSpeeds) {
+    public MecanumWheelSpeeds toWheelSpeeds(ChassisSpeeds chassisSpeeds) {
         return toWheelSpeeds(chassisSpeeds, new Translation2d());
     }
 
@@ -137,7 +137,7 @@ public class MecanumDriveKinematics {
      * @param wheelSpeeds The current mecanum drive wheel speeds.
      * @return The resulting chassis speed.
      */
-    public ChassisSpeeds toChassisSpeeds(MecanumDriveWheelSpeeds wheelSpeeds) {
+    public ChassisSpeeds toChassisSpeeds(MecanumWheelSpeeds wheelSpeeds) {
         var wheelSpeedsMatrix = new SimpleMatrix(4, 1);
         wheelSpeedsMatrix.setColumn(0, 0,
                 wheelSpeeds.frontLeftMetersPerSecond, wheelSpeeds.frontRightMetersPerSecond,

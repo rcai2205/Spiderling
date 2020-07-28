@@ -10,7 +10,7 @@ package spiderling.lib.kinematics;
 import java.util.stream.DoubleStream;
 
 @SuppressWarnings("MemberName")
-public class MecanumDriveSpeeds {
+public class MecanumWheelSpeeds {
     /**
      * Speed of the front left wheel.
      */
@@ -34,7 +34,7 @@ public class MecanumDriveSpeeds {
     /**
      * Constructs a MecanumDriveSpeeds with zeros for all member fields.
      */
-    public MecanumDriveSpeeds() {
+    public MecanumWheelSpeeds() {
     }
 
     /**
@@ -45,10 +45,10 @@ public class MecanumDriveSpeeds {
      * @param rearLeftMetersPerSecond   Speed of the rear left wheel.
      * @param rearRightMetersPerSecond  Speed of the rear right wheel.
      */
-    public MecanumDriveSpeeds(double frontLeftMetersPerSecond,
-                                   double frontRightMetersPerSecond,
-                                   double rearLeftMetersPerSecond,
-                                   double rearRightMetersPerSecond) {
+    public MecanumWheelSpeeds(double frontLeftMetersPerSecond,
+                              double frontRightMetersPerSecond,
+                              double rearLeftMetersPerSecond,
+                              double rearRightMetersPerSecond) {
         this.frontLeftMetersPerSecond = frontLeftMetersPerSecond;
         this.frontRightMetersPerSecond = frontRightMetersPerSecond;
         this.rearLeftMetersPerSecond = rearLeftMetersPerSecond;
