@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package edu.wpi.first.wpilibj.geometry;
+package spiderling.lib.geometry;
 
 import java.util.Objects;
 
