@@ -7,9 +7,9 @@
 
 package spiderling.lib.kinematics;
 
-import org.ejml.simple.SimpleMatrix;
-
 import spiderling.lib.geometry.Translation2d;
+import spiderling.lib.kinematics.ChassisSpeeds;
+import org.ejml.simple.SimpleMatrix;
 
 /**
  * Helper class that converts a chassis velocity (dx, dy, and dtheta components)
@@ -95,10 +95,10 @@ public class MecanumDriveKinematics {
                                                  Translation2d centerOfRotationMeters) {
         // We have a new center of rotation. We need to compute the matrix again.
         if (!centerOfRotationMeters.equals(m_prevCoR)) {
-            var fl = m_frontLeftWheelMeters.minus(centerOfRotationMeters);
-            var fr = m_frontRightWheelMeters.minus(centerOfRotationMeters);
-            var rl = m_rearLeftWheelMeters.minus(centerOfRotationMeters);
-            var rr = m_rearRightWheelMeters.minus(centerOfRotationMeters);
+            Translation2d fl = m_frontLeftWheelMeters.minus(centerOfRotationMeters);
+            Translation2d fr = m_frontRightWheelMeters.minus(centerOfRotationMeters);
+            Translation2d rl = m_rearLeftWheelMeters.minus(centerOfRotationMeters);
+            Translation2d rr = m_rearRightWheelMeters.minus(centerOfRotationMeters);
 
             setInverseKinematics(fl, fr, rl, rr);
             m_prevCoR = centerOfRotationMeters;

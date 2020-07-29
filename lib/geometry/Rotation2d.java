@@ -9,17 +9,10 @@ package spiderling.lib.geometry;
 
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 /**
  * A rotation in a 2d coordinate frame represented a point on the unit circle
  * (cosine and sine).
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonAutoDetect(getterVisibility = JsonAutoDetect.Visibility.NONE)
 public class Rotation2d {
     private final double m_value;
     private final double m_cos;
@@ -40,8 +33,7 @@ public class Rotation2d {
      *
      * @param value The value of the angle in radians.
      */
-    @JsonCreator
-    public Rotation2d(@JsonProperty(required = true, value = "radians") double value) {
+    public Rotation2d(double value) {
         m_value = value;
         m_cos = Math.cos(value);
         m_sin = Math.sin(value);
@@ -148,7 +140,6 @@ public class Rotation2d {
      *
      * @return The radian value of the rotation.
      */
-    @JsonProperty
     public double getRadians() {
         return m_value;
     }

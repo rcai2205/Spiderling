@@ -9,16 +9,9 @@ package spiderling.lib.geometry;
 
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 /**
  * Represents a 2d pose containing translational and rotational elements.
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonAutoDetect(getterVisibility = JsonAutoDetect.Visibility.NONE)
 public class Pose2d {
     private final Translation2d m_translation;
     private final Rotation2d m_rotation;
@@ -38,9 +31,7 @@ public class Pose2d {
      * @param translation The translational component of the pose.
      * @param rotation    The rotational component of the pose.
      */
-    @JsonCreator
-    public Pose2d(@JsonProperty(required = true, value = "translation") Translation2d translation,
-                  @JsonProperty(required = true, value = "rotation") Rotation2d rotation) {
+    public Pose2d(Translation2d translation, Rotation2d rotation) {
         m_translation = translation;
         m_rotation = rotation;
     }
@@ -82,7 +73,7 @@ public class Pose2d {
      * @return The transform that maps the other pose to the current pose.
      */
     public Transform2d minus(Pose2d other) {
-        final var pose = this.relativeTo(other);
+        final Pose2d pose = this.relativeTo(other);
         return new Transform2d(pose.getTranslation(), pose.getRotation());
     }
 
@@ -91,11 +82,10 @@ public class Pose2d {
      *
      * @return The translational component of the pose.
      */
-    @JsonProperty
+
     public Translation2d getTranslation() {
         return m_translation;
     }
-
     /**
      * Returns the X component of the pose's translation.
      *
@@ -119,7 +109,6 @@ public class Pose2d {
      *
      * @return The rotational component of the pose.
      */
-    @JsonProperty
     public Rotation2d getRotation() {
         return m_rotation;
     }
@@ -148,7 +137,7 @@ public class Pose2d {
      * @return The current pose relative to the new origin pose.
      */
     public Pose2d relativeTo(Pose2d other) {
-        var transform = new Transform2d(other, this);
+        Transform2d transform = new Transform2d(other, this);
         return new Pose2d(transform.getTranslation(), transform.getRotation());
     }
 
@@ -191,7 +180,7 @@ public class Pose2d {
             s = sinTheta / dtheta;
             c = (1 - cosTheta) / dtheta;
         }
-        var transform = new Transform2d(new Translation2d(dx * s - dy * c, dx * c + dy * s),
+        Transform2d transform = new Transform2d(new Translation2d(dx * s - dy * c, dx * c + dy * s),
                 new Rotation2d(cosTheta, sinTheta));
 
         return this.plus(transform);
@@ -205,11 +194,11 @@ public class Pose2d {
      * @return The twist that maps this to end.
      */
     public Twist2d log(Pose2d end) {
-        final var transform = end.relativeTo(this);
-        final var dtheta = transform.getRotation().getRadians();
-        final var halfDtheta = dtheta / 2.0;
+        final Pose2d transform = end.relativeTo(this);
+        final double dtheta = transform.getRotation().getRadians();
+        final double halfDtheta = dtheta / 2.0;
 
-        final var cosMinusOne = transform.getRotation().getCos() - 1;
+        final double cosMinusOne = transform.getRotation().getCos() - 1;
 
         double halfThetaByTanOfHalfDtheta;
         if (Math.abs(cosMinusOne) < 1E-9) {

@@ -9,11 +9,6 @@ package spiderling.lib.geometry;
 
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 /**
  * Represents a translation in 2d space.
  * This object can be used to represent a point or a vector.
@@ -23,8 +18,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * moving forward increases the X, whereas moving to the left increases the Y.
  */
 @SuppressWarnings({"ParameterName", "MemberName"})
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonAutoDetect(getterVisibility = JsonAutoDetect.Visibility.NONE)
 public class Translation2d {
     private final double m_x;
     private final double m_y;
@@ -43,9 +36,7 @@ public class Translation2d {
      * @param x The x component of the translation.
      * @param y The y component of the translation.
      */
-    @JsonCreator
-    public Translation2d(@JsonProperty(required = true, value = "x") double x,
-                         @JsonProperty(required = true, value = "y") double y) {
+    public Translation2d(double x, double y) {
         m_x = x;
         m_y = y;
     }
@@ -68,7 +59,6 @@ public class Translation2d {
      *
      * @return The x component of the translation.
      */
-    @JsonProperty
     public double getX() {
         return m_x;
     }
@@ -78,7 +68,6 @@ public class Translation2d {
      *
      * @return The y component of the translation.
      */
-    @JsonProperty
     public double getY() {
         return m_y;
     }
