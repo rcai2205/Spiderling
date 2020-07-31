@@ -1,4 +1,4 @@
-package spiderling.lib.geometry;
+package spiderling.lib.math;
 
 /**
  * Class that implements matrix functions for doubles
