@@ -155,7 +155,7 @@ public class Matrix {
             for (int i = 0; i < r1; i++) {
                 for (int j = 0; j < c2; j++) {
                     for (int k = 0; k < c1; k++) {
-                        product.setValueAt(i, j, matrix1.getValueAt(i, k) * matrix2.getValueAt(k, j));
+                        product.setValueAt(i, j, product.getValueAt(i, j) + matrix1.getValueAt(i, k) * matrix2.getValueAt(k, j));
                     }
                 }
             }
