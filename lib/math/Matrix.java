@@ -1,10 +1,11 @@
 package spiderling.lib.math;
 
+import java.util.Arrays;
+
 /**
  * Class that implements matrix functions for doubles
  */
 public class Matrix {
-
     private int nRows;
     private int nCols;
     private double[][] data;
@@ -29,6 +30,10 @@ public class Matrix {
         return nCols;
     }
 
+    public double[][] getData() {
+        return data;
+    }
+
     public void setValueAt(int row, int col, double value) {
         data[row][col] = value;
     }
@@ -38,8 +43,7 @@ public class Matrix {
     }
 
     public void setRow(int row, double[] values) {
-        if (values.length == nCols)
-            data[row] = values;
+        if (values.length == nCols) data[row] = values;
         else System.out.println("Length does not match");
     }
 
@@ -57,6 +61,10 @@ public class Matrix {
 
     public int size() {
         return nRows;
+    }
+
+    public boolean equals(Matrix other) {
+        return Arrays.deepEquals(other.getData(), data);
     }
 
     public Matrix multiplyByConstant(double value) {
@@ -82,11 +90,9 @@ public class Matrix {
     }
 
     public static int changeSign(int i) {
-        if (i % 2 == 1) {
-            i *= -1;
-        }
+        if (i % 2 == 1) return -1;
 
-        return i;
+        return 1;
     }
 
     public static double determinant(Matrix matrix) {
@@ -124,23 +130,24 @@ public class Matrix {
     }
 
     public static Matrix cofactor(Matrix matrix) {
-        Matrix mat = new Matrix(matrix.getNRows(), matrix.getNCols());
+        Matrix cofactorMatrix = new Matrix(matrix.getNRows(), matrix.getNCols());
         for (int i = 0; i < matrix.getNRows(); i++) {
             for (int j = 0; j < matrix.getNCols(); j++) {
-                mat.setValueAt(i, j, changeSign(i) * changeSign(j) *
+                cofactorMatrix.setValueAt(i, j, changeSign(i) * changeSign(j) *
                         determinant(createSubMatrix(matrix, i, j)));
             }
         }
 
-        return mat;
+        return cofactorMatrix;
     }
 
     public static Matrix inverse(Matrix matrix) {
+        if (matrix.getNRows() != matrix.getNCols()) System.out.println("Matrix must be square!");
         return (transpose(cofactor(matrix)).multiplyByConstant(1.0 / determinant(matrix)));
     }
 
     public static Matrix pseudoInverse(Matrix matrix) {
-        return multiply(inverse(multiply(matrix, transpose(matrix))), transpose(matrix));
+        return multiply(inverse(multiply(transpose(matrix), matrix)), transpose(matrix));
     }
 
     public static Matrix multiply(Matrix matrix1, Matrix matrix2) {
@@ -159,7 +166,7 @@ public class Matrix {
                     }
                 }
             }
-        }
+        } else System.out.println("Matrices are not compatible!");
 
         return product;
     }
