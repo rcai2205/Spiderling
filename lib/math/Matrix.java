@@ -26,7 +26,7 @@ public class Matrix {
     }
 
     public int getNCols() {
-        return nRows;
+        return nCols;
     }
 
     public void setValueAt(int row, int col, double value) {
