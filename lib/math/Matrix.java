@@ -64,7 +64,7 @@ public class Matrix {
 
         for (int i = 0; i < nRows; i++) {
             for (int j = 0; j < nCols; j++) {
-                newData[i][j] = newData[i][j] * value;
+                newData[i][j] = data[i][j] * value;
             }
         }
 
