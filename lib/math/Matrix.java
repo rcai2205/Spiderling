@@ -143,6 +143,7 @@ public class Matrix {
 
     public static Matrix inverse(Matrix matrix) {
         if (matrix.getNRows() != matrix.getNCols()) System.out.println("Matrix must be square!");
+        if (determinant(matrix) == 0) return matrix;
         return (transpose(cofactor(matrix)).multiplyByConstant(1.0 / determinant(matrix)));
     }
 
