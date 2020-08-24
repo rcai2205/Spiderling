@@ -39,7 +39,7 @@ public abstract class AutonomousBase extends OpMode {
 
     //Code that runs ONCE when the driver hits play
     @Override
-    public  final void start() {
+    public final void start() {
         lastTime = System.currentTimeMillis();
     }
 
