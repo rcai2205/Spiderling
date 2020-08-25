@@ -6,17 +6,23 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 @Disabled
 @Autonomous(name="StatefulAuto", group="Spiderling")
-public abstract class StatefulAuto<StateT extends Enum<?> & State<StateT>> extends OpMode {
+public abstract class StatefulAuto<StateT extends Enum<?> & State<StateT, RobotT>, RobotT> extends OpMode {
     protected StateT currentState, endState;
+    protected RobotT robot;
+
+    public void setInitialState(StateT state) {
+        currentState = state;
+        currentState.constructState(robot);
+    }
 
     public void setEndState(StateT state) {
         endState = state;
     }
 
-    public void setCurrentState(StateT currentState) {
-        this.currentState.deconstructState();
-        this.currentState = currentState;
-        this.currentState.constructState();
+    public void setCurrentState(StateT state) {
+        this.currentState.deconstructState(robot);
+        this.currentState = state;
+        this.currentState.constructState(robot);
     }
 
     public StateT getCurrentState() {
@@ -26,4 +32,6 @@ public abstract class StatefulAuto<StateT extends Enum<?> & State<StateT>> exten
     public boolean isFinished() {
         return currentState == endState;
     }
+
+    protected abstract void nextState();
 }

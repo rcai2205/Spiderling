@@ -3,24 +3,26 @@ package spiderling.lib.states;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-public interface State<T> {
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
+public interface State<T, RobotT> {
     ElapsedTime timer = new ElapsedTime(ElapsedTime.Resolution.MILLISECONDS);
 
-    default void constructState() {
+    default void constructState(RobotT robot) {
         timer.reset();
     }
 
-    default void deconstructState() {
+    default void deconstructState(RobotT robot) {
     }
 
-    default void run() {
-
+    default void run(RobotT robot) {
     }
 
-    default boolean isDone() {
+    default boolean isDone(RobotT robot) {
         return false;
     }
 
-    T nextState();
+    default void updateTelemetry(Telemetry telemetry) {
+    }
 }
 
